@@ -50,4 +50,27 @@ public class Music {
         return musics;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        if (title == null || title.isEmpty()) {
+            throw new InvalidOperationException("Error: \nTitle cannot be null or empty");
+        }
+        this.title = title;
+    }
+
+    public User getSinger() {
+        return singer;
+    }
+
+    public void setSinger(User singer) {
+        this.singer = singer;
+    }
+
+    public int getNumberOfStream() {
+        return numberOfStream;
+    }
+
 }
