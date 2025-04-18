@@ -6,6 +6,10 @@ public class PremiumBehavior implements UserBehavior {
     @Override
     public void createPlaylist(String title, User owner) {
         Playlist playlist = new Playlist(title, owner);
+        owner.addToPlaylist(playlist);
+
+        System.out.println(owner.getUsername() + " Playlist: " + title + " created.");
+        System.out.println();
     }
 
     @Override
@@ -16,7 +20,7 @@ public class PremiumBehavior implements UserBehavior {
     @Override
     public void buyPremium(User owner, int month) {
         if (month <= 0) {
-            throw new InvalidOperationException("Error: \nMonth must be a positive integer");
+            throw new InvalidOperationException("Error: \nMonth must be a positive integer.");
         }
         this.month += month;
         owner.setBehavior(this);
@@ -28,7 +32,7 @@ public class PremiumBehavior implements UserBehavior {
 
     public void setMonth(int month) {
         if (month <= 0) {
-            throw new InvalidOperationException("Error: \nMonth must be a positive integer");
+            throw new InvalidOperationException("Error: \nMonth must be a positive integer.");
         }
         this.month = month;
     }
