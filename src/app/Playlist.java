@@ -103,4 +103,31 @@ public class Playlist {
 
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        if (title == null || title.isEmpty()) {
+            throw new InvalidOperationException("Error: \nTitle cannot be null or empty");
+        }
+        this.title = title;
+    }
+
+    public ArrayList<Music> getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(ArrayList<Music> playlist) {
+        this.playlist = playlist;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
 }
