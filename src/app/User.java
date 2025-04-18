@@ -102,4 +102,23 @@ public class User {
         return followingList;
     }
 
+    public ArrayList<Playlist> getPlaylistList() {
+        return playlistList;
+    }
+
+    public void addToPlaylist (Playlist playlist) {
+        playlistList.add(playlist);
+    }
+
+    public Playlist getPlaylist (String title) {
+        if (playlistList.isEmpty()) {
+            throw new InvalidOperationException("Error: \nPlaylistList is empty.");
+        }
+        for (Playlist playlist : playlistList) {
+            if (playlist.getTitle().equals(title)) {
+                return playlist;
+            }
+        }
+        return null;
+    }
 }
