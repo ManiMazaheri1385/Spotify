@@ -10,12 +10,12 @@ public class Playlist {
 
     public Playlist(String title, User owner) {
         setTitle(title);
-        this.owner = owner;
+        setOwner(owner);
     }
 
     public void editTitle(String password, String title) {
         if (!password.equals(owner.getPassword())) {
-            throw new InvalidOperationException("Error: \nPassword does not match");
+            throw new InvalidOperationException("Error: \nPassword does not match.");
         }
 
         setTitle(title);
@@ -23,11 +23,11 @@ public class Playlist {
 
     public void addMusic(String password, Music music) {
         if (!password.equals(owner.getPassword())) {
-           throw new InvalidOperationException("Error: \nPassword does not match");
+           throw new InvalidOperationException("Error: \nPassword does not match.");
         }
 
         if (playlist.contains(music)) {
-            throw new InvalidOperationException("Error: \nMusic already exists in playlist");
+            throw new InvalidOperationException("Error: \nMusic already exists in playlist.");
         }
 
         playlist.add(music);
@@ -35,19 +35,19 @@ public class Playlist {
 
     public void removeMusic(String password, Music music) {
         if (!password.equals(owner.getPassword())) {
-            throw new InvalidOperationException("Error: \nPassword does not match");
+            throw new InvalidOperationException("Error: \nPassword does not match.");
         }
 
-        if (playlist.contains(music)) {
-            playlist.remove(music);
+        if (!playlist.contains(music)) {
+            throw new InvalidOperationException("Error: \nMusic does not exist in playlist.");
         }
 
-        throw new InvalidOperationException("Error: \nMusic does not exist in playlist");
+        playlist.remove(music);
     }
 
     public Music searchInPlaylist (String title, String singer) {
         if (playlist.isEmpty()) {
-            throw new InvalidOperationException("Error: \nPlaylist is empty");
+            throw new InvalidOperationException("Error: \nPlaylist is empty.");
         }
 
         for (Music music : playlist) {
@@ -60,11 +60,11 @@ public class Playlist {
     }
 
     public ArrayList<Music> searchInPlaylist (String title) {
-        ArrayList<Music> musics = new ArrayList<>();
-
         if (playlist.isEmpty()) {
-            throw new InvalidOperationException("Error: \nPlaylist is empty");
+            throw new InvalidOperationException("Error: \nPlaylist is empty.");
         }
+
+        ArrayList<Music> musics = new ArrayList<>();
 
         for (Music music : playlist) {
             if (title.equals(music.getTitle())) {
@@ -77,9 +77,10 @@ public class Playlist {
 
     public void playPlaylist () {
         if (playlist.isEmpty()) {
-            throw new InvalidOperationException("Error: \nPlaylist is empty");
+            throw new InvalidOperationException("Error: \nPlaylist is empty.");
         }
-
+        System.out.println("Playing " + title + " playlist:");
+        System.out.println();
         for (Music music : playlist) {
             Music.play(music);
         }
@@ -88,13 +89,15 @@ public class Playlist {
 
     public void shuffle() {
         if (playlist.isEmpty()) {
-            throw new InvalidOperationException("Error: \nPlaylist is empty");
+            throw new InvalidOperationException("Error: \nPlaylist is empty.");
         }
 
         ArrayList<Music> musics = new ArrayList<>(playlist);
 
         Random random = new Random();
 
+        System.out.println("Playing " + title + " playlist:");
+        System.out.println();
         while (!musics.isEmpty()) {
             int index = random.nextInt(musics.size());
             Music music = musics.remove(index);
@@ -109,7 +112,7 @@ public class Playlist {
 
     public void setTitle(String title) {
         if (title == null || title.isEmpty()) {
-            throw new InvalidOperationException("Error: \nTitle cannot be null or empty");
+            throw new InvalidOperationException("Error: \nTitle cannot be null or empty.");
         }
         this.title = title;
     }
@@ -127,6 +130,10 @@ public class Playlist {
     }
 
     public void setOwner(User owner) {
+        if (owner == null) {
+            throw new InvalidOperationException("Error: \nOwner cannot be null.");
+        }
+
         this.owner = owner;
     }
 
