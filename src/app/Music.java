@@ -73,4 +73,16 @@ public class Music {
         return numberOfStream;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Music music = (Music) object;
+        return title.equals(music.title) && singer.equals(music.singer);
+    }
+
 }
