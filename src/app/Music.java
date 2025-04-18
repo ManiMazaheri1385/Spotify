@@ -9,10 +9,45 @@ public class Music {
     private User singer;
     private int numberOfStream = 0;
 
-    void play(Music music) {}
+    public Music(String title, User singer) {
+        setTitle(title);
+        this.singer = singer;
+        allMusics.add(this);
+    }
 
-    void search (String title) {}
+    public static void play(Music music) {
+        System.out.println("Playing: " + music.title);
+        System.out.println("    Singer: " + music.singer.getUsername());
 
-    void search (String title, String singerName) {}
+        try {
+            Thread.sleep(10_000);
+        } catch (InterruptedException e) {
+            System.out.println("Error: \nSleep interrupted!");
+        }
+
+        System.out.println();
+        music.numberOfStream++;
+    }
+
+    public static Music search (String title, String singerName) {
+        for (Music music : allMusics) {
+            if (title.equals(music.title) && singerName.equals(music.singer.getUsername())) {
+                return music;
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<Music> search (String title) {
+        ArrayList<Music> musics = new ArrayList<>();
+
+        for (Music music : allMusics) {
+            if (title.equals(music.title)) {
+                musics.add(music);
+            }
+        }
+
+        return musics;
+    }
 
 }
