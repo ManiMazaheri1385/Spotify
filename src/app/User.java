@@ -121,4 +121,22 @@ public class User {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return username;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        User user = (User) object;
+        return username.equals(user.username);
+    }
+
 }
