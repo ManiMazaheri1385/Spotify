@@ -103,6 +103,11 @@ public class Music {
     }
 
     @Override
+    public String toString() {
+        return "(" + title + ", " + singer + ")";
+    }
+
+    @Override
     public boolean equals(Object object) {
         if (this == object) {
             return true;
